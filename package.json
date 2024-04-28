@@ -1,0 +1,24 @@
+{
+  "name": "leaflet.flowslayer",
+  "version": "1.0.0",
+  "description": "Leaflet extention to represent flows over polylines.",
+  "main": "src/L.FlowsLayer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chape1331/L.FlowsLayer.git"
+  },
+  "keywords": [
+    "Leaflet",
+    "Plugin",
+    "Flows"
+  ],
+  "author": "Gustavo Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chape1331/L.FlowsLayer/issues"
+  },
+  "homepage": "https://github.com/chape1331/L.FlowsLayer#readme"
+}
