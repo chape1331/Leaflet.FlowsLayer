@@ -4,6 +4,7 @@
   "description": "Leaflet extention to represent flows over polylines.",
   "main": "src/L.FlowsLayer.js",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/chape1331/L.FlowsLayer/issues"
   },
-  "homepage": "https://github.com/chape1331/L.FlowsLayer#readme"
+  "homepage": "https://github.com/chape1331/L.FlowsLayer#readme",
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
 }

@@ -45,8 +45,13 @@ L.FlowsLayer = L.GeoJSON.extend({
             let weight = layer.feature.properties[attributes.value] * style.sizeFactor;
             let styleCopy = Object.assign({}, style);
             styleCopy.weight = weight;
-            if (this._selectedIds.indexOf(id) != -1) styleCopy.color = style.colorSelected;
-            
+            var index = this._selectedIds.indexOf(id);
+            if (index != -1) {
+                layer.bringToFront();
+                index = index % style.colorSelected.length;
+                styleCopy.color = style.colorSelected[index];
+            }
+
             layer.setStyle(styleCopy);
         }
     },
@@ -63,6 +68,7 @@ L.FlowsLayer = L.GeoJSON.extend({
 
     _validateStyles: function() {
         let style = this.options.style;
+        if (typeof(style.colorSelected) == "string") style.colorSelected = [style.colorSelected]
 
         if (style == null | style == undefined) style = Object.assign({}, this._defaultStyle);
         else {
@@ -101,6 +107,20 @@ L.FlowsLayer = L.GeoJSON.extend({
         this._selectedIds = [];
 
         this.setStyle();
+    },
+
+    getSelected: function() {
+        let selection = {};
+        let style = this.options.style;
+
+        for (i in this._selectedIds) {
+            let item = this._selectedIds[i];
+            let index = this._selectedIds.indexOf(item);
+            index = index % style.colorSelected.length;
+            selection[item] = style.colorSelected[index]; 
+        }
+
+        return selection;
     },
 });
 
