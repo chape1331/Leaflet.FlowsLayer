@@ -9,6 +9,7 @@
 
 L.FlowsLayer = L.GeoJSON.extend({
     options: {
+        data: null,
         attributes: {},
         style: {},
     },
@@ -20,10 +21,11 @@ L.FlowsLayer = L.GeoJSON.extend({
     },
     _defaultStyle: {
         color: "#1f78b4",
+        // colorNull: "lightGray" -> if provided null values are shown.
         colorSelected: "#e31a1c",
         weight: 2,
         sizeFactor: 1,
-        opacity: 1.0,
+        opacity: 1.0,        
     },
     _selectedIds: [],
 
@@ -42,7 +44,12 @@ L.FlowsLayer = L.GeoJSON.extend({
         for (let key in layers){
             let layer = layers[key];
             let id = layer.feature.properties[attributes.id]; 
-            let weight = layer.feature.properties[attributes.value] * style.sizeFactor;
+            
+            let value = null;
+            if (this.options.data == null) value = layer.feature.properties[attributes.value];            
+            else value = this.options.data[id][attributes.value];
+
+            let weight = value * style.sizeFactor;
             let styleCopy = Object.assign({}, style);
             styleCopy.weight = weight;
             var index = this._selectedIds.indexOf(id);
@@ -76,6 +83,11 @@ L.FlowsLayer = L.GeoJSON.extend({
                 if (!(key in style)) style[key] = this._defaultStyle[key];
             }
         }
+    },
+
+    updateData: function(data) {
+        this.options.data = data;
+        this.setStyle();
     },
 
     updateStyle: function(style){
