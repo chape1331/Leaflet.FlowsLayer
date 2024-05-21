@@ -67,7 +67,7 @@ L.FlowsLayer = L.GeoJSON.extend({
         let attributes = this.options.attributes;
         if (attributes == null | attributes == undefined) attributes = Object.assign({}, this._defaultAttributes);
         else {
-            for (key in this._defaultAttributes){
+            for (let key in this._defaultAttributes){
                 if (!(key in attributes)) attributes[key] = this._defaultAttributes[key];
             }
         }
@@ -79,7 +79,7 @@ L.FlowsLayer = L.GeoJSON.extend({
 
         if (style == null | style == undefined) style = Object.assign({}, this._defaultStyle);
         else {
-            for (key in this._defaultStyle){
+            for (let key in this._defaultStyle){
                 if (!(key in style)) style[key] = this._defaultStyle[key];
             }
         }
@@ -125,7 +125,7 @@ L.FlowsLayer = L.GeoJSON.extend({
         let selection = {};
         let style = this.options.style;
 
-        for (i in this._selectedIds) {
+        for (let i in this._selectedIds) {
             let item = this._selectedIds[i];
             let index = this._selectedIds.indexOf(item);
             index = index % style.colorSelected.length;
